@@ -26,7 +26,7 @@ class Beers extends React.Component {
         },
         {
             title: "",
-            key: "action",
+            key: "action-delete",
             render: (_text, record) => (
                 <Popconfirm title="Are you sure to delete this beer?" onConfirm={() => this.deleteBeer(record.id)} okText="Yes" cancelText="No">
                     <a href="#" type="danger">

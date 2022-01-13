@@ -30,10 +30,18 @@ react javascript that we write.
 8. Now if you go to the Home component at app/javascript/components/Home.jsx, you will see that it will add certain html tags, and text, then calls another component called <Beers />
 
 
-9. Now in the Beers react component at app/javascript/components/Beers.jsx, there are react javascript code that will load the beers from the database (which is done by fetching json information from "api/v1/beers/index" in relative path. The prefix is whatever server your current application is running on). After receiving the json information, it will
-then render a table for you which uses a third-party library called "antd".
+9. Now in the Beers react component at app/javascript/components/Beers.jsx, there are react javascript code that will 
+load the beers from the database (which is done by fetching json information from "api/v1/beers/index" in relative 
+path. The prefix is whatever server your current application is running on). After receiving the json information, it 
+will then render a table for you which uses a third-party library called "antd".
 
 There are many more components being called but this is the beginning of the entire application.
+
+
+## Known issues
+* Currently the web browser is rendering double of the same application even though it seems like <App /> is only
+being called once.
+
 
 ## Other information
 This README would normally document whatever steps are necessary to get the

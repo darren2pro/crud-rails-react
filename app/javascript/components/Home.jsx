@@ -2,6 +2,7 @@ import { Layout } from "antd";
 import React from "react";
 import Beers from "./Beers";
 import Header from "./Header";
+import Beer from "./Beer";
 
 const { Content, Footer } = Layout;
 

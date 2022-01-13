@@ -7,5 +7,11 @@ import { render } from "react-dom";
 import App from "../components/App";
 
 document.addEventListener('DOMContentLoaded', () => {
-  render(<App />, document.body.appendChild(document.createElement("div")))
-})
+  if (!!document.getElementById("123")) {
+    // Coming here means that there is already such a child in the DOM with id being "123"
+    return
+  }
+  const element = document.createElement("div");
+  element.id = "123";
+  render(<App />, document.body.appendChild(element))
+});

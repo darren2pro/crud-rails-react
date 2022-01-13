@@ -1,6 +1,7 @@
 import { Table, message, Popconfirm } from "antd";
 import React from "react";
 import AddBeerModal from "./AddBeerModal";
+import { Link } from "react-router-dom";
 
 class Beers extends React.Component {
     columns = [
@@ -28,11 +29,14 @@ class Beers extends React.Component {
             title: "",
             key: "action-delete",
             render: (_text, record) => (
-                <Popconfirm title="Are you sure to delete this beer?" onConfirm={() => this.deleteBeer(record.id)} okText="Yes" cancelText="No">
-                    <a href="#" type="danger">
-                        Delete{" "}
-                    </a>
-                </Popconfirm>
+                <>
+                    <Popconfirm title="Are you sure to delete this beer?" onConfirm={() => this.deleteBeer(record.id)} okText="Yes" cancelText="No">
+                        <a href="#" type="danger">
+                            Delete{" "}
+                        </a>
+                    </Popconfirm>
+                    <Link to={`/${record.id}`}>Show</Link>
+                </>
             ),
         },
     ];

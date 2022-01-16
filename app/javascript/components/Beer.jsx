@@ -1,16 +1,50 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Descriptions } from 'antd';
+import { useParams } from "react-router-dom";
 
 const Beer = () => {
+    const beerId = useParams().id;
+    const skeletonBeerInformation = {
+        key: "",
+        id: "",
+        brand: "",
+        style: "",
+        country: "",
+        quantity: "",
+    };
+    const [beerInformation, setBeerInformation] = useState(skeletonBeerInformation);
+
+    const loadBeer = () => {
+        const url = `api/v1/beers/${beerId}`;
+        fetch(url)
+            .then((data) => {
+                if (data.ok) {
+                    return data.json();
+                }
+                throw new Error("Network error while getting the particular beer data.");
+            })
+            .then((beer) => {
+                const currentBeerElement = {
+                    key: beer.id,
+                    id: beer.id,
+                    brand: beer.brand,
+                    style: beer.style,
+                    country: beer.country,
+                    quantity: beer.quantity,
+                }
+                setBeerInformation(currentBeerElement);
+            })
+            .catch((err) => console.error("Error: " + err));
+    };
+
+    loadBeer();
+
     return (
-        <Descriptions title="User Info">
-            <Descriptions.Item label="UserName">Zhou Maomao</Descriptions.Item>
-            <Descriptions.Item label="Telephone">1810000000</Descriptions.Item>
-            <Descriptions.Item label="Live">Hangzhou, Zhejiang</Descriptions.Item>
-            <Descriptions.Item label="Remark">empty</Descriptions.Item>
-            <Descriptions.Item label="Address">
-                No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-            </Descriptions.Item>
+        <Descriptions title="Beer Info">
+            <Descriptions.Item label="brand">{beerInformation.brand}</Descriptions.Item>
+            <Descriptions.Item label="style">{beerInformation.style}</Descriptions.Item>
+            <Descriptions.Item label="country">{beerInformation.country}</Descriptions.Item>
+            <Descriptions.Item label="quantity">{beerInformation.quantity}</Descriptions.Item>
         </Descriptions>
     );
 };

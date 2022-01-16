@@ -15,6 +15,9 @@ const Beer = () => {
     const [beerInformation, setBeerInformation] = useState(skeletonBeerInformation);
 
     const loadBeer = () => {
+        if (beerInformation != skeletonBeerInformation) {
+            return
+        }
         const url = `api/v1/beers/${beerId}`;
         fetch(url)
             .then((data) => {

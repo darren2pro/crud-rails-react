@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get "beers/:id", to: "beers#show"
       post "beers/", to: "beers#create"
       delete "beers/:id", to: "beers#destroy"
+      put "beers/:id", to: "beers#update"
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

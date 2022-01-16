@@ -7,13 +7,50 @@ class EditBeerModal extends React.Component {
     formRef = React.createRef();
     state = {
         visible: false,
+        currentBeerElement: {
+            key: "",
+            id: "",
+            brand: "",
+            style: "",
+            country: "",
+            quantity: "",
+        },
     };
 
-    onFinish = (values, id) => {
-        const url = "api/v1/beers/";
+    loadBeer = () => {
+        const url = `api/v1/beers/${this.props.beerId}`;
+        fetch(url)
+            .then((data) => {
+                if (data.ok) {
+                    return data.json();
+                }
+                throw new Error("Network error while getting the particular beer data.");
+            })
+            .then((beer) => {
+                const currentBeerElement = {
+                    key: beer.id,
+                    id: beer.id,
+                    brand: beer.brand,
+                    style: beer.style,
+                    country: beer.country,
+                    quantity: beer.quantity,
+                }
+                this.setState({currentBeerElement: currentBeerElement})
+            })
+            .catch((err) => console.error("Error: " + err));
+    };
+
+    componentDidMount() {
+        this.loadBeer();
+    }
+
+    onFinish = (values) => {
+        console.log("values:", values);
+        const url = `api/v1/beers/${this.props.beerId}`;
         fetch(url, {
-            method: "post",
+            method: "put",
             headers: {
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(values),
@@ -24,12 +61,13 @@ class EditBeerModal extends React.Component {
 
                     return data.json();
                 }
+                console.log(data);
                 throw new Error("Network error.");
             })
             .then(() => {
                 this.props.reloadBeers();
             })
-            .catch((err) => console.error("Error: " + err));
+            .catch((err) => console.error("Error caught from the code: " + err));
     };
 
     showModal = () => {
@@ -48,11 +86,16 @@ class EditBeerModal extends React.Component {
         return (
             <>
                 <Button type="primary" onClick={this.showModal}>
-                    Create New +
+                    Edit this
                 </Button>
 
-                <Modal title="Add New Beer ..." visible={this.state.visible} onCancel={this.handleCancel} footer={null}>
-                    <Form ref={this.formRef} layout="vertical" onFinish={this.onFinish}>
+                <Modal title="Edit this beer ..." visible={this.state.visible} onCancel={this.handleCancel} footer={null}>
+                    <Form ref={this.formRef} layout="vertical" onFinish={this.onFinish} initialValues={{
+                        brand: this.state.currentBeerElement.brand,
+                        style: this.state.currentBeerElement.style,
+                        quantity: this.state.currentBeerElement.quantity,
+                        country: this.state.currentBeerElement.country,
+                    }}>
                         <Form.Item name="brand" label="Brand" rules={[{ required: true, message: "Please input your beer brand!" }]}>
                             <Input placeholder="Input your beer brand" />
                         </Form.Item>

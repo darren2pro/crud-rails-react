@@ -16,7 +16,7 @@ const Beer = () => {
 
     const loadBeer = () => {
         if (beerInformation != skeletonBeerInformation) {
-            return
+            return;
         }
         const url = `api/v1/beers/${beerId}`;
         fetch(url)

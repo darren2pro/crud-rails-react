@@ -58,7 +58,7 @@ class EditBeerModal extends React.Component {
             .then((data) => {
                 if (data.ok) {
                     this.handleCancel();
-
+                    this.props.displayRefreshPageMessage();
                     return data.json();
                 }
                 console.log(data);

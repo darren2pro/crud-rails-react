@@ -1,5 +1,5 @@
 import React from "react";
-import {message, Popconfirm, Table} from "antd";
+import {message, Popconfirm, Table, Alert} from "antd";
 import AddBeerModal from "./AddBeerModal";
 import {Link} from "react-router-dom";
 import EditBeerModal from "./EditBeerModal";
@@ -31,7 +31,9 @@ class BeerList extends React.Component {
             key: "actions",
             render: (_text, record) => (
                 <>
-                    <Popconfirm title="Are you sure to delete this beer?" onConfirm={() => this.deleteBeer(record.id)} okText="Yes" cancelText="No">
+                    <Popconfirm title="Are you sure to delete this beer?" onConfirm={() => {
+                        this.deleteBeer(record.id);
+                    }} okText="Yes" cancelText="No" >
                         <a href="#" type="danger">
                             Delete{" "}
                         </a>
@@ -101,11 +103,13 @@ class BeerList extends React.Component {
         const toDisplay = typeof this.props.userFacingBeerList[0] == "undefined" ? this.state.beers: this.props.userFacingBeerList;
         return (
             <>
+                <Alert message="Whenever you delete or add a new beer, you have to refresh the page." type="info"
+                       closable={false} banner={true} />
                 <Table className="table-striped-rows" dataSource={toDisplay} columns={this.columns} pagination={{ pageSize: 5 }} />
 
                 <AddBeerModal reloadBeers={this.reloadBeers} />
             </>
-        )
+        );
     }
 }
 

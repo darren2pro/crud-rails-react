@@ -61,8 +61,6 @@ const SearchPage = () => {
         loadAllBeers();
     }, []);
 
-    console.log("re-rendered");
-    console.log(filteredBeers);
     return (
         <Layout className="layout">
             <Header />

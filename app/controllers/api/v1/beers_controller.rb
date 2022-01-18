@@ -5,7 +5,7 @@ class Api::V1::BeersController < ApplicationController
   # GET /beers or /beers.json
   def index
     @beers = Beer.all.order(brand: :asc)
-    render json: @beers
+    render json: @beers.to_json(:include => [:tags])
   end
 
   # GET /beers/1 or /beers/1.json

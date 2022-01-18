@@ -1,5 +1,16 @@
 # README
 
+[Important info about how this application works](#how-the-browser-calls-the-different-files-to-render-the-webpage)
+
+[Known functionality improvements](#coming-soon)
+
+## Coming soon
+- Display tags within the display table in the Beers component in the index page.
+- Implement the logic for adding tags with a particular beer_id + create a modal for that.
+- Implement the logic for deleting tags with a particular beer_id + create a button for that. Note: Each tag probably needs a button because each tag is distinct.
+- Add the association dependency between Beer and Tags with respect to the :delete method so that associated tags are deleted from the database whenever the associated
+beer is deleted.
+
 ## How the browser calls the different files to render the webpage
 
 Note: At the moment, this application is a single page application (SPA) so there are no other urls that you can enter. All create and destroy operations that act on the database
@@ -66,5 +77,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
-[Important info about how this application works](#how-the-browser-calls-the-different-files-to-render-the-webpage)

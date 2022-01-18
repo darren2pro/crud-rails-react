@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post "beers/", to: "beers#create"
       delete "beers/:id", to: "beers#destroy"
       put "beers/:id", to: "beers#update"
+      resources :tags, only: [:create, :destroy]
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

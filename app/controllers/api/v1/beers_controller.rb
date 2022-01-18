@@ -5,13 +5,13 @@ class Api::V1::BeersController < ApplicationController
   # GET /beers or /beers.json
   def index
     @beers = Beer.all.order(brand: :asc)
-    render json: @beers
+    render json: @beers.to_json(:include => [:tags])
   end
 
   # GET /beers/1 or /beers/1.json
   def show
     if @beer
-      render json: @beer
+      render json: @beer.to_json(:include => [:tags])
     else
       render json: @beer.errors
     end
@@ -57,6 +57,7 @@ class Api::V1::BeersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_beer
     @beer = Beer.find(params[:id])
+    @tags = @beer.tags
   end
 
   # Only allow a list of trusted parameters through.

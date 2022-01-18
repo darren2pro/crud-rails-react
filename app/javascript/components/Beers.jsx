@@ -2,6 +2,7 @@ import { Table, message, Popconfirm } from "antd";
 import React from "react";
 import AddBeerModal from "./AddBeerModal";
 import EditBeerModal from "./EditBeerModal";
+import AddTagModal from "./Tag/AddTagModal";
 import { Link } from "react-router-dom";
 
 class Beers extends React.Component {
@@ -39,6 +40,7 @@ class Beers extends React.Component {
                     <Link to={`/${record.id}`}>Show</Link>
                     <br/>
                     <EditBeerModal reloadBeers={this.reloadBeers} beerId={record.id} />
+                    <AddTagModal />
                 </>
             ),
         },
@@ -63,6 +65,8 @@ class Beers extends React.Component {
             })
             .then((data) => {
                 data.forEach((beer) => {
+                    const tags = beer.tags;
+                    console.log("Tags for this beer.", tags);
                     const newEl = {
                         key: beer.id,
                         id: beer.id,
@@ -71,7 +75,6 @@ class Beers extends React.Component {
                         country: beer.country,
                         quantity: beer.quantity,
                     };
-
                     this.setState((prevState) => ({
                         beers: [...prevState.beers, newEl],
                     }));

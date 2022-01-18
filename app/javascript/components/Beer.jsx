@@ -13,7 +13,7 @@ const Beer = () => {
         quantity: "",
     };
     const [beerInformation, setBeerInformation] = useState(skeletonBeerInformation);
-    const [tagInformation, setTagInformation] = useState({});
+    const [tagInformation, setTagInformation] = useState([{}]);
 
     const loadBeer = () => {
         if (beerInformation != skeletonBeerInformation) {
@@ -37,7 +37,18 @@ const Beer = () => {
                     country: beer.country,
                     quantity: beer.quantity,
                 }
+                let tags = [];
+                for (let tagIdx in beer.tags) {
+                    const currTag = beer.tags[tagIdx];
+                    const polishedTag = {
+                        key: currTag.id,
+                        id: currTag.id,
+                        title: currTag.title,
+                    };
+                    tags.push(polishedTag);
+                }
                 setBeerInformation(currentBeerElement);
+                setTagInformation(tags);
             })
             .catch((err) => console.error("Error: " + err));
     };
@@ -52,6 +63,7 @@ const Beer = () => {
             <Descriptions.Item label="style">{beerInformation.style}</Descriptions.Item>
             <Descriptions.Item label="country">{beerInformation.country}</Descriptions.Item>
             <Descriptions.Item label="quantity">{beerInformation.quantity}</Descriptions.Item>
+            <Descriptions.Item label="tags">{"This shows the number of tags, but you can easily display all the tags too: " + tagInformation.length}</Descriptions.Item>
         </Descriptions>
     );
 };

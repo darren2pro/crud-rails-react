@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_13_022837) do
+ActiveRecord::Schema.define(version: 2022_01_18_023621) do
 
   create_table "beers", force: :cascade do |t|
     t.string "brand"
@@ -21,4 +21,13 @@ ActiveRecord::Schema.define(version: 2022_01_13_022837) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "title"
+    t.integer "beer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["beer_id"], name: "index_tags_on_beer_id"
+  end
+
+  add_foreign_key "tags", "beers"
 end

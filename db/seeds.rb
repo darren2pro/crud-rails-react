@@ -8,5 +8,5 @@
 Beer.create(brand: 'Double Stout', style: 'Stout', country: 'Netherlands', quantity: 54)
 Beer.create(brand: 'Spaten', style: 'Helles', country: 'Germany', quantity: 3)
 Beer.create(brand: 'Newcastle', style: 'Brown ale', country: 'UK', quantity: 12)
-Tag.create(title: "Hot product")
-Tag.create(title: "Selling out fast")
+# Tag.create(title: "Hot product", beer_id: 3)
+# Tag.create(title: "Selling out fast", beer_id: 3)

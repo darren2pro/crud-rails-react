@@ -13,6 +13,7 @@ const Beer = () => {
         quantity: "",
     };
     const [beerInformation, setBeerInformation] = useState(skeletonBeerInformation);
+    const [tagInformation, setTagInformation] = useState({});
 
     const loadBeer = () => {
         if (beerInformation != skeletonBeerInformation) {
@@ -27,6 +28,7 @@ const Beer = () => {
                 throw new Error("Network error while getting the particular beer data.");
             })
             .then((beer) => {
+                console.log("beer beer:", beer);
                 const currentBeerElement = {
                     key: beer.id,
                     id: beer.id,
@@ -40,7 +42,9 @@ const Beer = () => {
             .catch((err) => console.error("Error: " + err));
     };
 
-    loadBeer();
+    useEffect( () => {
+        loadBeer();
+    }, []);
 
     return (
         <Descriptions title="Beer Info">

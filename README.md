@@ -28,7 +28,7 @@ will be presented as a pop up dialog box for the user.
 4. This app/controllers/api/v1/beers_controller.rb##index method here will call all the beers in the database and render a json. (This is still at the backend.)
 
 
-5. At the same time, the browser will search for the index.jsx file in app/javascript/packs to render the front end. Here I defined it such that it will render the <App />
+5. At the same time, the browser will search for the index.jsx file in app/javascript/packs to render the front end. Here I defined it such that it will render the `<App />`
 
 
 6. This <App /> will simply return all the routes that we defined in app/javascript/routes/index.jsx. This is where every route we define will render a certain element/component in
@@ -38,7 +38,7 @@ react javascript that we write.
 7. For example, <Route path="/" element={<Home/>} /> will mean that at the root path, the react component Home will be rendered.
 
 
-8. Now if you go to the Home component at app/javascript/components/Home.jsx, you will see that it will add certain html tags, and text, then calls another component called <Beers />
+8. Now if you go to the Home component at app/javascript/components/Home.jsx, you will see that it will add certain html tags, and text, then calls another component called `<Beers />`
 
 
 9. Now in the Beers react component at app/javascript/components/Beers.jsx, there are react javascript code that will 
@@ -50,8 +50,6 @@ There are many more components being called but this is the beginning of the ent
 
 
 ## Known issues
-* Currently the web browser is rendering double of the same application even though it seems like <App /> is only
-being called once.
 
 
 ## Other information
